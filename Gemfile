@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://gems.ruby-china.com'
 
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -39,3 +39,9 @@ gem "kramdown-parser-gfm"
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+
+gem 'webrick'
+
+group :jekyll_plugins do
+  gem "jekyll-timeago", "~> 0.13.1"
+end

@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    <ul class="post-list">
+      {%- assign previous_date = "" -%}
+      {%- for post in site.posts -%}
+        {%- assign current_date = post.date | date: "%b %-d, %Y" -%}
+        {%- if current_date != previous_date -%}
+          {%- if previous_date != "" -%}
+            </ul>
+          {%- endif -%}
+          <span class="post-meta">{{ current_date }}</span>
+          <ul class="post-list">
+        {%- endif -%}
+        <li>
+          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          
+          {% comment %}单独日期显示
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          {% endcomment %}
+          
+          <span>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </span>
+
+          {% comment %} 摘要
+          {%- if site.show_excerpts -%}
+            {{ post.excerpt }}
+          {%- endif -%}
+          {% endcomment %}
+
+        </li>
+        {%- assign previous_date = current_date -%}
+      {%- endfor -%}
+    </ul>
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+</div>
